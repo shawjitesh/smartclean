@@ -32,6 +32,18 @@ Smart Clean Technologies Round 1
     @PostMapping("/_create")
     public ResponseEntity createNewTimer(@RequestParam long start, @RequestParam long step) {
       TimerEntity timerEntity = timerService.createNewTimer(start, step);
+      Thread newTimerThread = new Thread(() -> {
+        while(true) {
+          timerService.updateCounterValue(timerEntity.getId());
+          try {
+            Thread.sleep(step * 1000L);
+          } catch(InterruptedException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+          }
+        }
+      });
+      newTimerThread.start();
       return new ResponseEntity<>(timerEntity.getId(), HttpStatus.CREATED);
     }
 
