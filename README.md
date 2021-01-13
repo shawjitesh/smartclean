@@ -183,6 +183,7 @@ Smart Clean Technologies Round 1
       public TimerResponse pauseTimer(String id) {
         TimerEntity timerEntity = repository.findById(id).orElseThrow(() -> new RuntimeException("No entry found for id: " + id));
         timerEntity.setModifiedAt(LocalDateTime.now());
+        repository.save(timerEntity);
         return new TimerResponse(timerEntity.getCounterValue(), timerEntity.getStepTime());
       }
   }
