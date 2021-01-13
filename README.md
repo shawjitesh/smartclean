@@ -378,8 +378,12 @@ Smart Clean Technologies Round 1
 
 ## application.properties
 ```
-  spring.mvc.view.prefix= /WEB-INF/jsp/
-  spring.mvc.view.suffix= .jsp
-
   logging.level.org.springframework.web= DEBUG
+
+  spring.h2.console.enabled=true
+  spring.datasource.url=jdbc:h2:mem:testdb
+  spring.datasource.driverClassName=org.h2.Driver
+  spring.datasource.username=sa
+  spring.datasource.password=password
+  spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
 ```
